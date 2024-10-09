@@ -1,5 +1,4 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
 import { RootState, useAppDispatch } from "./redux/store";
 import { useSelector } from "react-redux";
 import toast, { Toaster } from "react-hot-toast";
@@ -35,68 +34,58 @@ const App = () => {
   }, [isLoading]);
   return (
     <main className="app">
-      <Container className="col-12 col-md-7 ">
-        <div className="card w-100 p-4 bg-transparent border-white text-white">
-          <div className="text-center d-block d-md-flex gap-3">
+      <div className="containerr ">
+        <div className="cards">
+          <div className="forms">
             <input
               type="text"
-              className=" input-group-text w-100 text-start m-auto bg-transparent text-white"
+              // className=""
               placeholder="Enter Country"
               value={country}
               onChange={handleCountry}
             />
-            <Button
-              className={`bg-transparent border-white w-100 mt-2 mt-md-0 fw-bold ${
-                country === "" ? "disabled" : null
-              }`}
-              onClick={OnSubminBtn}
-            >
+            <button onClick={OnSubminBtn} type="button">
               Search
-            </Button>
+            </button>
           </div>
 
           {/* data */}
           {!isLoading && weathers.cod === 200 ? (
-            <Row>
-              <Col
-                sm="12"
-                className=" d-flex  align-items-center justify-content-between mt-5"
-              >
+            <div>
+              <div className="details">
                 <div>
-                  <p className=" fw-bold fs-4 m-0">{weathers.name}</p>
-                  <h1 className="fw-bold  ">
+                  <p className="name">{weathers.name}</p>
+                  <h1 className="bold">
                     {convertToCelsius(weathers.main.temp)}°C
                   </h1>
                 </div>
                 <h4 className="weather">{weathers.weather[0].main}</h4>
-              </Col>
-              <Col
-                sm="12"
-                className="rounded-3 d-flex flex-wrap  p-3 justify-content-evenly align-items-center gap-4 mt-5"
-              >
+              </div>
+              {/*  seconed dev*/}
+              <div className="weather-conditions">
                 <div className="text-center">
-                  <h4 className=" fs-5 fw-bold"> Feels Like</h4>
-                  <h4 className="fw-bold">
+                  <h4 className=" fontstyle"> Feels Like</h4>
+                  <h4 className="fontstyle">
                     {convertToCelsius(weathers.main.feels_like)}°C
                   </h4>
                 </div>
                 <div className="text-center">
-                  <h4 className=" fs-5 fw-bold">Humidity </h4>
-                  <h4 className="fw-bold">
+                  <h4 className=" fontstyle">Humidity </h4>
+                  <h4 className="fontstyle">
                     {weathers.main.humidity.toFixed()}%
                   </h4>
                 </div>
                 <div className="text-center">
-                  <h4 className=" fs-5 fw-bold">Wind Speed</h4>
-                  <h4 className="fw-bold">
+                  <h4 className=" fontstyle">Wind Speed</h4>
+                  <h4 className="fontstyle">
                     {weathers.wind.speed.toFixed()}MPH
                   </h4>
                 </div>
-              </Col>
-            </Row>
+              </div>
+            </div>
           ) : null}
         </div>
-      </Container>
+      </div>
       <Toaster></Toaster>
     </main>
   );
