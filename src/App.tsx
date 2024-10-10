@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { RootState, useAppDispatch } from "./redux/store";
 import { useSelector } from "react-redux";
 import toast, { Toaster } from "react-hot-toast";
@@ -12,6 +12,9 @@ const App = () => {
 
   // on Click
   const OnSubminBtn = async () => {
+    if (country === "") {
+      return;
+    }
     await dispatch(getWeatherAction(country));
   };
 
@@ -39,7 +42,6 @@ const App = () => {
           <div className="forms">
             <input
               type="text"
-              // className=""
               placeholder="Enter Country"
               value={country}
               onChange={handleCountry}
